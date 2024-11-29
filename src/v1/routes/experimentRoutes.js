@@ -6,16 +6,10 @@ router.get('/', experinentController.getAllExperiments);
 
 router.get('/:experimentId', experinentController.getOneExperiment);
 
-router.post('/', (req, res) => {
-    res.send('Create a new experiment');
-});
+router.post('/', experinentController.createNewExperiment);
 
-router.patch('/:experimentId', (req, res) => {
-    res.send('Update an existing experiment');
-});
+router.patch('/:experimentId',experinentController.updateOneExperiment);
 
-router.delete('/:experimentId', (req, res) => {
-    res.send('Delete an existing experiment');
-});
+router.delete('/:experimentId', experinentController.deleteOneExperiment);
 
 module.exports = router;

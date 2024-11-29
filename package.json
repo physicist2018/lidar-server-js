@@ -6,7 +6,7 @@
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "<physicist2018@yandex.ru>",
   "license": "ISC",
   "description": "",
   "devDependencies": {
@@ -14,8 +14,12 @@
   },
   "dependencies": {
     "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
+    "http-status-codes": "^2.3.0",
+    "morgan": "^1.10.0",
     "rethinkdb": "^2.4.2",
     "uuid": "^11.0.3"
-  }
+  },
+  "repository": "git@github.com:physicist2018/lidar-server-js.git"
 }
