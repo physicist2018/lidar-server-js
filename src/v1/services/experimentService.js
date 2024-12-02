@@ -1,11 +1,21 @@
 const { v4: uuid } = require("uuid");
-const Experiment = require("../models/experiment");
+const ExperimrntModel = require("../models/experiment");
 
 const getAllExperiments = async () => {
-  Experiment.run().then((result) => {
-    console.log(result);
-    return result;
+  const exp = new ExperimrntModel({
+    Title: "Hello",
+    Comments: "Hello",
+    MolecularModel: {},
+    ProfileDat: [{}],
+    ProfileDak: [{}],
   });
+  exp.save().then((res) => {
+    console.log(res);
+  });
+  // Experiment.run().then((result) => {
+  //   console.log(result);
+  //   return result;
+  // });
 };
 
 const getOneExperiment = async (id) => {

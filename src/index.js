@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -14,14 +15,12 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(connect.connect);
 
 // add routes to our express
 const v1Experiment = require("./v1/routes/experimentRoutes");
 const { StatusCodes } = require("http-status-codes");
 
 app.use("/api/v1/experiments", v1Experiment);
-app.use(connect.close);
 
 app.all("*", (_req, res) => {
   res.status(StatusCodes.NOT_FOUND).send({

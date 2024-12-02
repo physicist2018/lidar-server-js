@@ -64,6 +64,16 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
   integrity sha512-UfFSr22dmHPQqPP9XWHRhq+gWnHCYguQGkXQlbyPtW5qTnhFWA8/iXg765tH0cAjy7l/zPJ1aBTO0g5XgA7kvQ==
 
+"bluebird@>= 3.0.1":
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
+  integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
+
+bluebird@~2.10.2:
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
+  integrity sha512-ebc2LqTYQlFqC6wTQl9gknHsqh4EKBLR++8VzGMSh7CnsOedhymVD1ShVl19TRTx6WeMd1b5xXuKo8m6oP8pYQ==
+
 body-parser@1.20.3, body-parser@^1.20.3:
   version "1.20.3"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.20.3.tgz#1953431221c6fb5cd63c4b36d53fab0928e548c6"
@@ -200,6 +210,11 @@ destroy@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.2.0.tgz#4803735509ad8be552934c67df614f94e66fa015"
   integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
+
+dotenv@^16.4.5:
+  version "16.4.5"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.5.tgz#cdd3b3b604cb327e286b4762e13502f717cb099f"
+  integrity sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -667,6 +682,13 @@ rethinkdb@^2.4.2:
   dependencies:
     bluebird ">= 2.3.2 < 3"
 
+rethinkdbdash@~2.3.0:
+  version "2.3.31"
+  resolved "https://registry.yarnpkg.com/rethinkdbdash/-/rethinkdbdash-2.3.31.tgz#fe2f73d1fa6e6f5d96d8e881292013cf6dca914d"
+  integrity sha512-6nXrKFjdg2Ug0YpdmPWSvyD/2EisHnFNt4FWZ74dcXGK48ievSv+cNFTmVv+KjLi6I9CCf6w4CKZ6yCYTfMfdQ==
+  dependencies:
+    bluebird ">= 3.0.1"
+
 safe-buffer@5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
@@ -774,6 +796,15 @@ supports-color@^5.5.0:
   dependencies:
     has-flag "^3.0.0"
 
+thinky@^2.3.9:
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/thinky/-/thinky-2.3.9.tgz#16f80868a65c7fb490d316ddb342308f7e290cfa"
+  integrity sha512-4zp4wIQdwqyHP9CVoOa0/AV3GnKprHfOOVRj1KigtVcWi1DT7Eut52DVfX9nyI59399S+N6e3J5+4+y64ruf/g==
+  dependencies:
+    bluebird "~2.10.2"
+    rethinkdbdash "~2.3.0"
+    validator "~3.34.0"
+
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-5.0.1.tgz#1648c44aae7c8d988a326018ed72f5b4dd0392e4"
@@ -825,6 +856,11 @@ uuid@^11.0.3:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.3.tgz#248451cac9d1a4a4128033e765d137e2b2c49a3d"
   integrity sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==
+
+validator@~3.34.0:
+  version "3.34.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-3.34.0.tgz#67cb418121f8fbaef597d97376d61b0db5937cc6"
+  integrity sha512-MhsDIQ9JAK5nq2szXjfXSJBpLetXd1laLqB5rPCQ9Xvuv5nRs0Wu8Uk3jORaiun7Egmh6VKYL7a7u7hhV9QFZQ==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
