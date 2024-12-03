@@ -10,6 +10,7 @@ const IS_PROD = process.env.NODE_ENV === "production";
 const app = express();
 
 // add middlewares
+app.use(connect.connect);
 app.use(cors());
 app.use(morgan("common"));
 app.use(bodyParser.json());
@@ -21,6 +22,8 @@ const v1Experiment = require("./v1/routes/experimentRoutes");
 const { StatusCodes } = require("http-status-codes");
 
 app.use("/api/v1/experiments", v1Experiment);
+
+app.use(connect.close);
 
 app.all("*", (_req, res) => {
   res.status(StatusCodes.NOT_FOUND).send({

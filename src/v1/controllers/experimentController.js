@@ -3,7 +3,7 @@ var { StatusCodes } = require("http-status-codes");
 const { Experiment } = require("../models/index");
 
 const getAllExperiments = async (req, res) => {
-  const allExperiments = await experiemtService.getAllExperiments();
+  const allExperiments = await experiemtService.getAllExperiments(req._rdb);
   res.status(StatusCodes.OK).json(allExperiments);
 };
 
@@ -15,7 +15,11 @@ const getOneExperiment = async (req, res) => {
   if (!experimentId) {
     return;
   }
-  const experiment = await experiemtService.getOneExperiment(experimentId);
+  const experiment = await experiemtService.getOneExperiment(
+    req._rdb,
+    experimentId
+  );
+  console.log(experiment);
   res.status(StatusCodes.OK).json(experiment);
 };
 
