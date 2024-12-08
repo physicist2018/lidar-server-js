@@ -1,29 +1,35 @@
 const { v4: uuid } = require("uuid");
 const r = require("rethinkdb");
-const ExperimrentModel = require("../models/experiment");
+const config = require("../../config/database");
 const MolecularModel = require("../models/molecular_profile_model");
+const ExperimentModel = require("../models/experiment");
 
 const getAllExperiments = async (rdb) => {
   const res = r
-    .table("Experiment")
+    .table(config.table)
     .run(rdb)
     .then((items) => {
-      console.log(items);
-      const exp_objs = items.map((it) => {
-        return new ExperimentModel(it);
-      });
+      return items.toArray();
+    })
+    .then((arr) => {
+      //console.log(arr);
+      const exp_objs = ExperimentModel.fromArray(arr);
+
       return exp_objs;
+    })
+    .catch((err) => {
+      return null;
     });
   return res;
 };
 
 const getOneExperiment = async (rdb, id) => {
   const exp = r
-    .table("Experiment")
+    .table(config.table)
     .get(id)
     .run(rdb)
     .then((res) => {
-      const exp = new ExperimrntModel(res);
+      const exp = new ExperimentModel(res);
       return exp;
     })
     .catch((err) => {

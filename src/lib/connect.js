@@ -3,6 +3,7 @@
 const r = require("rethinkdb");
 const config = require("../config/database");
 
+// Make connection and return rdb property with any request object
 module.exports.connect = function (req, res, next) {
   let count = 0;
 
