@@ -1,6 +1,5 @@
 const experiemtService = require("../services/experimentService");
 var { StatusCodes } = require("http-status-codes");
-const { Experiment } = require("../models/index");
 
 const getAllExperiments = async (req, res) => {
   const allExperiments = await experiemtService.getAllExperiments(req._rdb);
@@ -36,14 +35,11 @@ const createNewExperiment = async (req, res) => {
   //   }
 
   const newExperiment = {
-    title: body.title,
-    comments: body.comments,
-    experimentTime: body.exerimentTime,
-    vertRes: body.vertRes,
-    accum: body.accum,
+    ...body,
   };
 
   const createdExperiment = await experiemtService.createNewExperiment(
+    req._rdb,
     newExperiment
   );
   res.status(StatusCodes.CREATED).json(createdExperiment);
@@ -57,7 +53,8 @@ const updateOneExperiment = async (req, res) => {
   if (!experimentId) {
     return;
   }
-  const updatedExperiment = experiemtService.updateOneExperiment(
+  const updatedExperiment = await experiemtService.updateOneExperiment(
+    req._rdb,
     experimentId,
     body
   );

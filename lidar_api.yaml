@@ -1,0 +1,272 @@
+openapi: 3.0.3
+info:
+  title: LidarAPI
+  version: 1.0.0
+  description: Сервер, управляющий хоранением данных лидарного зондирования
+paths:
+  /experiments:
+    get:
+      summary: Получение списка всех экспериментов
+      description: ''
+      operationId: getExperiments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Experiment'
+          description: Успех, возвращает список экспериментов, в любом случае - это список
+      tags:
+        - experiment
+    post:
+      summary: Создание экземпляра эксперимента
+      operationId: createExperiment
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+          description: Создает запись об эксперименте в БД
+      tags:
+        - experiment
+  /experiments/{experimentId}:
+    get:
+      summary: "Запрос информации оэ эксперименте по его experimentId"
+      description: ''
+      operationId: getExperimentOne
+      parameters:
+        - name: experimentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+          
+          description: Эксперимент найден, возвращаем его
+        '404':
+          content:
+            application/json:
+              examples:
+                notfound:
+                  value: |-
+                    {}
+          description: Эксперимент не найден, возвращаем пустой объект
+      tags:
+        - experiment
+    delete:
+      summary: "Удаление эксперимента по его experimentId"
+      description: ''
+      operationId: deleteExperiment
+      parameters:
+        - name: experimentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+          
+          description: Удаление прошло успешно
+        '404':
+          content:
+            application/json:
+              examples:
+                notfound:
+                  value: |-
+                    {}
+          description: в случае если запись не найдена также возвращает объект
+      tags:
+        - experiment
+    
+    put:
+      summary: "Обновление эксперимента по его experimentId"
+      description: ''
+      operationId: putExperiment
+      parameters:
+        - name: experimentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+          
+          description: Обновление прошло успешно
+        '404':
+          content:
+            application/json:
+              examples:
+                notfound:
+                  value: |-
+                    {}
+          description: в случае если запись не найдена также возвращает объект
+      tags:
+        - experiment
+          
+          
+components:
+  schemas:
+    MolecularModel:
+      type: object
+      required:
+        - latitude
+        - lingitude
+        - altitude
+        - density
+      properties:
+        latitude:
+          type: number
+          example: 43.1
+        longitude:
+          type:  number
+          example: 131.9
+        altitude:
+          type: array
+          items:
+            type: number
+        density:
+          type: array
+          items:
+            type: number
+            
+    ResultScattring:
+      type: object
+      required:
+        - id
+        - referene_alt
+        - reference_val
+        - bacground_alt
+        - profile
+      properties:
+        id:
+          type: string
+          format: uuid
+        reference_alt:
+          type: number
+          example: 30000
+        reference_val:
+          type: number
+          example: 1.001
+        bacground_alt:
+          type: number
+          example: 80000
+        profile:
+          type: array
+          items:
+            type: number
+    Measurement:
+      type: object
+      required:
+        - id
+        - start_time
+        - wavelen
+        - prof_len
+        - prof_cnt
+        - rep_rate
+      properties:
+        id:
+          type: string
+          format: uuid
+        start_time:
+          type: string
+          format: date-time
+        wavelen:
+          type: number
+          example: 532.000
+        prof_len:
+          type: integer
+          example: 512
+        proc_cnt:
+          type: integer
+          example: 100
+        rep_rate:
+          type: integer
+          example: 10
+        profile:
+          type: array
+          items:
+            type: integer
+        scattering_ratio:
+          $ref: '#/components/schemas/ResultScattring'
+
+    Experiment:
+      type: object
+      required:
+        - id
+        - title
+        - experiment_time
+        - accum_time
+        - vert_res
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          example: 'no-title'
+        comments:
+          type: string
+          example: 'no-comments'
+        experiment_time:
+          type: string
+          format: date-time
+        accum_time:
+          type: integer
+          example: 100
+        vert_res:
+          type: number
+          example: 1500.0
+        dat:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measurement'
+        dak:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measurement'
+        molecular_model:
+          $ref: '#/components/schemas/MolecularModel'
+    
+    ResponseModel:
+      type: object
+      properties:
+        deleted:
+          type: integer
+          example: 0
+        errors:
+          type: integer
+          example: 0
+        inserted:
+          type: integer
+          example: 0
+        replaced:
+          type: integer
+          example: 0
+        skipped:
+          type: integer
+          example: 0
+        unchanged:
+          type: integer
+          example: 0
+
+        
+        

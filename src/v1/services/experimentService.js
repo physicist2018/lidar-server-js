@@ -1,10 +1,9 @@
 const { v4: uuid } = require("uuid");
 const r = require("rethinkdb");
 const config = require("../../config/database");
-const MolecularModel = require("../models/molecular_profile_model");
-const ExperimentModel = require("../models/experiment");
+const { ExperimentModel } = require("../models");
 
-const getAllExperiments = async (rdb) => {
+const getAllExperiments = (rdb) => {
   const res = r
     .table(config.table)
     .run(rdb)
@@ -12,10 +11,8 @@ const getAllExperiments = async (rdb) => {
       return items.toArray();
     })
     .then((arr) => {
-      //console.log(arr);
-      const exp_objs = ExperimentModel.fromArray(arr);
-
-      return exp_objs;
+      console.log(arr);
+      return ExperimentModel.fromArray(arr);
     })
     .catch((err) => {
       return null;
@@ -39,16 +36,25 @@ const getOneExperiment = async (rdb, id) => {
   return exp;
 };
 
-const createNewExperiment = async (newExperiment) => {
-  const exper = new Experiment(newExperiment);
-  exper.save().then((result) => {
-    return result;
-  });
+const createNewExperiment = (rdb, newExperiment) => {
+  const exper = new ExperimentModel(newExperiment);
+  const ret = r
+    .table(config.table)
+    .insert(exper)
+    .run(rdb)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+  return ret;
 };
 
 const updateOneExperiment = async (rdb, experimentId, changes) => {
   const upd = r
-    .table("Experiment")
+    .table(config.table)
     .get(experimentId)
     .update(changes)
     .run(rdb)
@@ -57,6 +63,7 @@ const updateOneExperiment = async (rdb, experimentId, changes) => {
     })
     .catch((err) => {
       console.log(err);
+      return err;
     })
     .finally(() => {});
 
@@ -65,7 +72,7 @@ const updateOneExperiment = async (rdb, experimentId, changes) => {
 
 const deleteOneExperiment = async (rdb, experimentId) => {
   const dlt = r
-    .table("Experimnent")
+    .table(config.table)
     .get(experimentId)
     .delete()
     .run(rdb)

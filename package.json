@@ -17,11 +17,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-validator": "^7.2.0",
     "http-status-codes": "^2.3.0",
-    "mongoose": "^8.8.3",
     "morgan": "^1.10.0",
     "rethinkdb": "^2.4.2",
-    "thinky": "^2.3.9",
     "uuid": "^11.0.3"
   },
   "repository": "git@github.com:physicist2018/lidar-server-js.git"

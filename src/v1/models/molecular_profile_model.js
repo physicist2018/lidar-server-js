@@ -1,10 +1,10 @@
 class MolecularModel {
   constructor({ lat, lon, alt, dens }) {
-    this.lat = lat || 43.1;
-    this.lon = lon || 131.9;
-    this.alt = alt || [1, 2, 3, 4];
-    this.density = dens || [1, 2, 3, 4];
+    this.latitude = lat || 43.1;
+    this.longitude = lon || 131.9;
+    this.altitude = alt || [];
+    this.density = dens || [];
   }
 }
 
-module.exports = MolecularModel;
+module.exports = { MolecularModel };
