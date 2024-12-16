@@ -18,7 +18,7 @@ const getOneExperiment = async (req, res) => {
     req._rdb,
     experimentId
   );
-  console.log(experiment);
+
   res.status(StatusCodes.OK).json(experiment);
 };
 
@@ -65,10 +65,15 @@ const deleteOneExperiment = async (req, res) => {
   const {
     params: { experimentId },
   } = req;
+
+  console.log(experimentId);
   if (!experimentId) {
     return;
   }
-  const experiment = await experiemtService.deleteOneExperiment(experimentId);
+  const experiment = await experiemtService.deleteOneExperiment(
+    req._rdb,
+    experimentId
+  );
   res.status(StatusCodes.OK).json(experiment);
 };
 

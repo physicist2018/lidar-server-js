@@ -26,11 +26,12 @@ const getOneExperiment = async (rdb, id) => {
     .get(id)
     .run(rdb)
     .then((res) => {
-      const exp = new ExperimentModel(res);
+      const exp = new ExperimentModel(res || { id: id });
       return exp;
     })
     .catch((err) => {
       console.log(err);
+      return new ExperimentModel({});
     })
     .finally(() => {});
   return exp;
@@ -38,6 +39,7 @@ const getOneExperiment = async (rdb, id) => {
 
 const createNewExperiment = (rdb, newExperiment) => {
   const exper = new ExperimentModel(newExperiment);
+  console.log(exper);
   const ret = r
     .table(config.table)
     .insert(exper)
@@ -81,6 +83,7 @@ const deleteOneExperiment = async (rdb, experimentId) => {
     })
     .catch((err) => {
       console.log(err);
+      return { err: err };
     })
     .finally(() => {});
 

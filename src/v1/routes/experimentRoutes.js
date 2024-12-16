@@ -1,15 +1,15 @@
-const express = require('express');
-const experinentController = require('../controllers/experimentController')
+const express = require("express");
+const experinentController = require("../controllers/experimentController");
 const router = express.Router();
 
-router.get('/', experinentController.getAllExperiments);
+router.get("/", experinentController.getAllExperiments);
 
-router.get('/:experimentId', experinentController.getOneExperiment);
+router.get("/:experimentId", experinentController.getOneExperiment);
 
-router.post('/', experinentController.createNewExperiment);
+router.post("/", experinentController.createNewExperiment);
 
-router.patch('/:experimentId',experinentController.updateOneExperiment);
+router.put("/:experimentId", experinentController.updateOneExperiment);
 
-router.delete('/:experimentId', experinentController.deleteOneExperiment);
+router.delete("/:experimentId", experinentController.deleteOneExperiment);
 
 module.exports = router;

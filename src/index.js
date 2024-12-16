@@ -12,7 +12,7 @@ const app = express();
 // add middlewares
 app.use(connect.connect);
 app.use(cors());
-app.use(morgan("common"));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
