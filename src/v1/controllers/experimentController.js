@@ -1,6 +1,13 @@
 const experiemtService = require("../services/experimentService");
 var { StatusCodes } = require("http-status-codes");
 
+const getAllExperimentsShort = async (req, res) => {
+  const allExperimentsShort = await experiemtService.getAllExperimentsShort(
+    req._rdb
+  );
+  res.status(StatusCodes.OK).json(allExperimentsShort);
+};
+
 const getAllExperiments = async (req, res) => {
   const allExperiments = await experiemtService.getAllExperiments(req._rdb);
   res.status(StatusCodes.OK).json(allExperiments);
@@ -79,6 +86,7 @@ const deleteOneExperiment = async (req, res) => {
 
 module.exports = {
   getAllExperiments,
+  getAllExperimentsShort,
   getOneExperiment,
   updateOneExperiment,
   createNewExperiment,

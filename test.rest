@@ -3,11 +3,11 @@ GET http://localhost:7777/api/v1/experiments
 
 ###
 #Get single exeriment
-GET http://localhost:7777/api/v1/experiments/ca2542b5-fa8d-48f1-bffe-dc8a12dd05f4
+GET http://localhost:7777/api/v1/experiments/4d41664c-8803-4ba7-8b3d-807a0b5dc8eb
 
 ###
 # delete an experiment
-DELETE  http://localhost:7777/api/v1/experiments/0
+DELETE  http://localhost:7777/api/v1/experiments/4d41664c-8803-4ba7-8b3d-807a0b5dc8eb
 
 
 ###

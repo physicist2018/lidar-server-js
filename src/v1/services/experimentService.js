@@ -3,6 +3,18 @@ const r = require("rethinkdb");
 const config = require("../../config/database");
 const { ExperimentModel } = require("../models");
 
+const getAllExperimentsShort = (rdb) => {
+  const res = r
+    .table(config.table)
+    .pluck("id")
+    .run(rdb)
+    .then((items) => items.toArray())
+    // .then((arr) => ExperimentModel.fromArray(arr))
+    .catch((err) => null);
+
+  return res;
+};
+
 const getAllExperiments = (rdb) => {
   const res = r
     .table(config.table)
@@ -92,6 +104,7 @@ const deleteOneExperiment = async (rdb, experimentId) => {
 
 module.exports = {
   getAllExperiments,
+  getAllExperimentsShort,
   getOneExperiment,
   createNewExperiment,
   updateOneExperiment,
