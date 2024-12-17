@@ -3,11 +3,32 @@ info:
   title: LidarAPI
   version: 1.0.0
   description: Сервер, управляющий хоранением данных лидарного зондирования
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://kshmirko.fvds1.ru:7777
+tags:
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: store
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
 paths:
   /experiments:
     get:
       summary: Получение списка всех экспериментов
-      description: ''
+      description: Получение полного списка экспериментов
       operationId: getExperiments
       responses:
         '200':
@@ -23,6 +44,11 @@ paths:
     post:
       summary: Создание экземпляра эксперимента
       operationId: createExperiment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Experiment'
       responses:
         '201':
           content:

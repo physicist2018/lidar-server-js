@@ -11,7 +11,7 @@ const getAllExperiments = (rdb) => {
       return items.toArray();
     })
     .then((arr) => {
-      console.log(arr);
+      //console.log(arr);
       return ExperimentModel.fromArray(arr);
     })
     .catch((err) => {
