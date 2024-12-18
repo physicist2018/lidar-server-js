@@ -1,9 +1,9 @@
 # Get all experiments
-GET http://localhost:7777/api/v1/experiments
+GET http://localhost:7777/api/v1/experiments/short
 
 ###
 #Get single exeriment
-GET http://localhost:7777/api/v1/experiments/4d41664c-8803-4ba7-8b3d-807a0b5dc8eb
+GET http://localhost:7777/api/v1/experiments/32893b22-6ac8-48cc-8d5a-6dc3ff308485
 
 ###
 # delete an experiment
@@ -12,7 +12,7 @@ DELETE  http://localhost:7777/api/v1/experiments/4d41664c-8803-4ba7-8b3d-807a0b5
 
 ###
 # Update an experiment
-PUT  http://localhost:7777/api/v1/experiments/4d41664c-8803-4ba7-8b3d-807a0b5dc8eb HTTP/1.1
+PUT  http://localhost:7777/api/v1/experiments/32893b22-6ac8-48cc-8d5a-6dc3ff308485 HTTP/1.1
 content-type: application/json
 
 {
@@ -46,7 +46,7 @@ content-type: application/json
 {
   "title": "1111 param param",
   "comments": "no-comments",
-  "start_time": "2024-12-10T02:08:11.241Z",
+  "start_time": "2024-12-18T16:37:11.241Z",
   "spatial_res": 1500,
   "accum_time": 10,
   "dak": [],
@@ -54,7 +54,7 @@ content-type: application/json
   "molecular_data": {
     "latitude": 43.1,
     "longitude": 131.9,
-    "altitude": [100, 200,300,400, 500],
-    "density": [1,  0.5, 0.333, 0.25, 0.2]
+    "altitude": [],
+    "density": []
   }
 }

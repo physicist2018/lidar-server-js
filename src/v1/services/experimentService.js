@@ -6,10 +6,14 @@ const { ExperimentModel } = require("../models");
 const getAllExperimentsShort = (rdb) => {
   const res = r
     .table(config.table)
-    .pluck("id")
+    .pluck("id", "start_time", "accum_time")
     .run(rdb)
     .then((items) => items.toArray())
-    // .then((arr) => ExperimentModel.fromArray(arr))
+    .then((arr) =>
+      arr.map(
+        (e) => e.id + "_" + e.start_time.toISOString() + "_" + e.accum_time
+      )
+    )
     .catch((err) => null);
 
   return res;

@@ -3,24 +3,11 @@ const experinentController = require("../controllers/experimentController");
 const { param, body, validationResult } = require("express-validator");
 const router = express.Router();
 
-router.get("/", experinentController.getAllExperiments);
-
-router.get("/short", experinentController.getAllExperimentsShort);
-
 const uuidChain = () =>
   param("experimentId")
     .trim()
     .isUUID()
     .withMessage("Неверный UUID идентификатор");
-router.get("/:experimentId", uuidChain(), async (req, res) => {
-  try {
-    validationResult(req).throw();
-    await experinentController.getOneExperiment(req, res);
-  } catch (e) {
-    res.status(400).json({ errors: e.mapped() });
-  }
-});
-
 const titleChain = () =>
   body("title").trim().notEmpty().withMessage("Поле title обязательно");
 const commentsChain = () =>
@@ -31,7 +18,8 @@ const startTimeChain = () =>
     .notEmpty()
     .withMessage("Поле start_time обязательно")
     .isISO8601()
-    .withMessage("Поле start_time должно быть в формате ISO 8601");
+    .withMessage("Поле start_time должно быть в формате ISO 8601")
+    .toDate();
 const spatialResChain = () =>
   body("spatial_res")
     .trim()
@@ -66,6 +54,20 @@ const molecularDataChain = () =>
     .withMessage("Поле molecular_data обязательно")
     .isObject()
     .withMessage("Поле molecular_data должно быть объектом");
+
+router.get("/", experinentController.getAllExperiments);
+
+router.get("/short", experinentController.getAllExperimentsShort);
+
+router.get("/:experimentId", uuidChain(), async (req, res) => {
+  try {
+    validationResult(req).throw();
+    await experinentController.getOneExperiment(req, res);
+  } catch (e) {
+    res.status(400).json({ errors: e.mapped() });
+  }
+});
+
 router.post(
   "/",
   titleChain(),
@@ -87,14 +89,26 @@ router.post(
   }
 );
 
-router.put("/:experimentId", uuidChain(), async (req, res) => {
-  try {
-    validationResult(req).throw();
-    await experinentController.updateOneExperiment(req, res);
-  } catch (e) {
-    res.status(400).json({ errors: e.mapped() });
+router.put(
+  "/:experimentId",
+  uuidChain(),
+  titleChain(),
+  commentsChain(),
+  startTimeChain(),
+  spatialResChain(),
+  accumTimeChain(),
+  arrayDatChain(),
+  arrayDakChain(),
+  molecularDataChain(),
+  async (req, res) => {
+    try {
+      validationResult(req).throw();
+      await experinentController.updateOneExperiment(req, res);
+    } catch (e) {
+      res.status(400).json({ errors: e.mapped() });
+    }
   }
-});
+);
 
 router.delete("/:experimentId", uuidChain(), async (req, res) => {
   try {
